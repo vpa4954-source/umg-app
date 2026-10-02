@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام إدارة مرشحي البيع المباشر</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #F8F9FA;
+      --surface: #FFFFFF;
+      --surface-elevated: #F1F3F5;
+      --primary: #1E293B;
+      --primary-accent: #B88E38;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --success: #10B981;
+      --danger: #EF4444;
+      --radius-card: 16px;
+      --radius-btn: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Tajawal', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 520px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 4px;
+    }
+
+    header h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .badge-count {
+      background-color: var(--surface-elevated);
+      color: var(--primary-accent);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 13px;
+      border: 1px solid var(--border);
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 14px;
+      text-align: center;
+    }
+
+    .stat-card .num {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-card .label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 18px;
+    }
+
+    .card h2 {
+      font-size: 15px;
+      margin-bottom: 12px;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px 14px;
+      background: var(--surface-elevated);
+      border: 1px solid transparent;
+      border-radius: var(--radius-btn);
+      font-size: 14px;
+      outline: none;
+      color: var(--text-main);
+    }
+
+    input[type="text"]:focus {
+      background: #FFFFFF;
+      border-color: var(--primary-accent);
+    }
+
+    .btn-add {
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 0 18px;
+      border-radius: var(--radius-btn);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .tag-btn {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .tag-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+      font-weight: 700;
+    }
+
+    .list-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin: 8px 4px 4px 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .prospect-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .prospect-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-btn);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .prospect-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .prospect-name {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .prospect-category {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .prospect-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .action-btn {
+      padding: 5px 9px;
+      border-radius: 6px;
+      font-size: 11px;
+      border: 1px solid var(--border);
+      background: var(--surface-elevated);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .action-btn.active-top21 {
+      background: #FEF3C7;
+      color: #92400E;
+      border-color: #FDE68A;
+    }
+
+    .action-btn.active-top5 {
+      background: #DCFCE7;
+      color: #166534;
+      border-color: #BBF7D0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <header>
+      <div>
+        <h1>قائمة الـ 250 اسم</h1>
+        <small style="color: var(--text-muted);">مسار تحويل وتصفية المرشحين</small>
+      </div>
+      <div class="badge-count" id="totalBadge">0 / 250</div>
+    </header>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="num" id="statTotal">0</div>
+        <div class="label">إجمالي القائمة</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="statTop21" style="color: var(--primary-accent);">0</div>
+        <div class="label">أفضل 21</div>
+      </div>
+      <div class="stat-card">
+        <div class="num" id="statTop5" style="color: var(--success);">0</div>
+        <div class="label">أفضل 5 جاهزين</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>إضافة مرشح بلمسة واحدة</h2>
+      <div class="tags-container" id="categoryContainer">
+        <button class="tag-btn active" onclick="selectCategory('الأهل وعائلتهم')">الأهل</button>
+        <button class="tag-btn" onclick="selectCategory('الأصدقاء')">الأصدقاء</button>
+        <button class="tag-btn" onclick="selectCategory('أصدقاء الدراسة')">الدراسة</button>
+        <button class="tag-btn" onclick="selectCategory('أصدقاء العمل')">العمل</button>
+        <button class="tag-btn" onclick="selectCategory('مواقع التواصل')">سوشيال ميديا</button>
+        <button class="tag-btn" onclick="selectCategory('المحافظات والدول')">محافظات ودول</button>
+        <button class="tag-btn" onclick="selectCategory('المعارف العامة')">معارف عامة</button>
+      </div>
+
+      <div class="input-group">
+        <input type="text" id="nameInput" placeholder="اكتب اسم المرشح هنا..." onkeypress="handleKey(event)" />
+        <button class="btn-add" onclick="addProspect()">إضافة</button>
+      </div>
+    </div>
+
+    <div class="list-title">
+      <span>المرشحون المسجلون</span>
+      <span id="filteredText">كل الأسماء</span>
+    </div>
+
+    <div class="prospect-list" id="prospectsContainer"></div>
+  </div>
+
+  <script>
+    let currentCategory = 'الأهل وعائلتهم';
+    let prospects = JSON.parse(localStorage.getItem('umg_prospects')) || [];
+
+    function selectCategory(cat) {
+      currentCategory = cat;
+      const buttons = document.querySelectorAll('.tag-btn');
+      buttons.forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.trim() === cat || (cat === 'الأهل وعائلتهم' && btn.textContent.trim() === 'الأهل'));
+      });
+    }
+
+    function addProspect() {
+      const input = document.getElementById('nameInput');
+      const name = input.value.trim();
+      if (!name) return;
+
+      const newProspect = {
+        id: Date.now(),
+        name: name,
+        category: currentCategory,
+        isTop21: false,
+        isTop5: false
+      };
+
+      prospects.unshift(newProspect);
+      saveAndRender();
+      input.value = '';
+      input.focus();
+    }
+
+    function handleKey(e) {
+      if (e.key === 'Enter') addProspect();
+    }
+
+    function toggleTop21(id) {
+      prospects = prospects.map(p => {
+        if (p.id === id) {
+          const nextVal = !p.isTop21;
+          return { ...p, isTop21: nextVal, isTop5: nextVal ? p.isTop5 : false };
+        }
+        return p;
+      });
+      saveAndRender();
+    }
+
+    function toggleTop5(id) {
+      prospects = prospects.map(p => {
+        if (p.id === id) {
+          const nextVal = !p.isTop5;
+          return { ...p, isTop5: nextVal, isTop21: nextVal ? true : p.isTop21 };
+        }
+        return p;
+      });
+      saveAndRender();
+    }
+
+    function removeProspect(id) {
+      prospects = prospects.filter(p => p.id !== id);
+      saveAndRender();
+    }
+
+    function saveAndRender() {
+      localStorage.setItem('umg_prospects', JSON.stringify(prospects));
+      render();
+    }
+
+    function render() {
+      const container = document.getElementById('prospectsContainer');
+      container.innerHTML = '';
+
+      const top21Count = prospects.filter(p => p.isTop21).length;
+      const top5Count = prospects.filter(p => p.isTop5).length;
+
+      document.getElementById('statTotal').innerText = prospects.length;
+      document.getElementById('statTop21').innerText = top21Count;
+      document.getElementById('statTop5').innerText = top5Count;
+      document.getElementById('totalBadge').innerText = `${prospects.length} / 250`;
+
+      if (prospects.length === 0) {
+        container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 30px 0; font-size: 13px;">لا توجد أسماء مضافة بعد. اختر الفئة واكتب أول اسم!</div>`;
+        return;
+      }
+
+      prospects.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'prospect-item';
+        item.innerHTML = `
+          <div class="prospect-info">
+            <span class="prospect-name">${p.name}</span>
+            <span class="prospect-category">${p.category}</span>
+          </div>
+          <div class="prospect-actions">
+            <button class="action-btn ${p.isTop21 ? 'active-top21' : ''}" onclick="toggleTop21(${p.id})">⭐ 21</button>
+            <button class="action-btn ${p.isTop5 ? 'active-top5' : ''}" onclick="toggleTop5(${p.id})">🔥 5 للدعوة</button>
+            <button class="action-btn" style="color: var(--danger);" onclick="removeProspect(${p.id})">✕</button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    render();
+  </script>
+</body>
+</html>

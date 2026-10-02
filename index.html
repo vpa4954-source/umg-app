@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>نظام إدارة مرشحي البيع المباشر</title>
+  <title>نظام إدارة البيع المباشر المتكامل</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
@@ -38,63 +38,51 @@
       padding: 16px;
       display: flex;
       justify-content: center;
+      min-height: 100vh;
     }
 
     .app-container {
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 4px;
-    }
-
-    header h1 {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--primary);
-    }
-
-    .badge-count {
-      background-color: var(--surface-elevated);
-      color: var(--primary-accent);
-      padding: 4px 12px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 13px;
-      border: 1px solid var(--border);
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .stat-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-card);
-      padding: 14px;
-      text-align: center;
+      padding: 14px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .stat-card .num {
-      font-size: 22px;
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .role-tag {
+      background: var(--surface-elevated);
+      color: var(--primary-accent);
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
       font-weight: 700;
-      color: var(--primary);
     }
 
-    .stat-card .label {
+    .btn-logout {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--danger);
+      padding: 4px 10px;
+      border-radius: 8px;
       font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 2px;
+      cursor: pointer;
     }
 
     .card {
@@ -104,22 +92,41 @@
       padding: 18px;
     }
 
-    .card h2 {
-      font-size: 15px;
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
       margin-bottom: 12px;
-      color: var(--text-main);
-      font-weight: 700;
     }
 
+    .stat-box {
+      background: var(--surface-elevated);
+      border-radius: var(--radius-btn);
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat-box .num {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .stat-box .lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* حقول الإدخال */
     .input-group {
       display: flex;
       gap: 8px;
-      margin-bottom: 12px;
+      margin-top: 10px;
     }
 
-    input[type="text"] {
+    input, select {
       flex: 1;
-      padding: 12px 14px;
+      padding: 12px;
       background: var(--surface-elevated);
       border: 1px solid transparent;
       border-radius: var(--radius-btn);
@@ -128,108 +135,71 @@
       color: var(--text-main);
     }
 
-    input[type="text"]:focus {
+    input:focus, select:focus {
       background: #FFFFFF;
       border-color: var(--primary-accent);
     }
 
-    .btn-add {
+    .btn-main {
       background: var(--primary);
       color: #FFFFFF;
       border: none;
-      padding: 0 18px;
+      padding: 12px 18px;
       border-radius: var(--radius-btn);
       font-weight: 700;
       cursor: pointer;
     }
 
-    .tags-container {
+    /* رجّاجات الذاكرة */
+    .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin-bottom: 8px;
+      margin: 10px 0;
     }
 
-    .tag-btn {
+    .tag {
       background: var(--surface-elevated);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 6px 12px;
+      padding: 6px 10px;
       font-size: 12px;
       cursor: pointer;
-      color: var(--text-muted);
     }
 
-    .tag-btn.active {
+    .tag.active {
       background: var(--primary);
-      color: #FFFFFF;
-      border-color: var(--primary);
-      font-weight: 700;
+      color: white;
     }
 
-    .list-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin: 8px 4px 4px 4px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .prospect-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .prospect-item {
+    /* القوائم والجداول */
+    .item-card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius-btn);
-      padding: 12px 14px;
+      padding: 12px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
     }
 
-    .prospect-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .prospect-name {
-      font-size: 15px;
-      font-weight: 700;
-    }
-
-    .prospect-category {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .prospect-actions {
+    .actions {
       display: flex;
       gap: 6px;
     }
 
-    .action-btn {
-      padding: 5px 9px;
+    .btn-sm {
+      padding: 5px 8px;
       border-radius: 6px;
-      font-size: 11px;
       border: 1px solid var(--border);
       background: var(--surface-elevated);
+      font-size: 11px;
       cursor: pointer;
       font-weight: 600;
     }
 
-    .action-btn.active-top21 {
-      background: #FEF3C7;
-      color: #92400E;
-      border-color: #FDE68A;
-    }
-
-    .action-btn.active-top5 {
+    .active-top {
       background: #DCFCE7;
       color: #166534;
       border-color: #BBF7D0;
@@ -238,159 +208,215 @@
 </head>
 <body>
 
-  <div class="app-container">
-    <header>
-      <div>
-        <h1>قائمة الـ 250 اسم</h1>
-        <small style="color: var(--text-muted);">مسار تحويل وتصفية المرشحين</small>
-      </div>
-      <div class="badge-count" id="totalBadge">0 / 250</div>
-    </header>
+<div class="app-container">
 
-    <div class="stats-row">
-      <div class="stat-card">
-        <div class="num" id="statTotal">0</div>
-        <div class="label">إجمالي القائمة</div>
-      </div>
-      <div class="stat-card">
-        <div class="num" id="statTop21" style="color: var(--primary-accent);">0</div>
-        <div class="label">أفضل 21</div>
-      </div>
-      <div class="stat-card">
-        <div class="num" id="statTop5" style="color: var(--success);">0</div>
-        <div class="label">أفضل 5 جاهزين</div>
-      </div>
+  <!-- شاشة الدخول السريعة لتجربة كل الأدوار -->
+  <div id="loginView" class="card" style="margin-top: 40px;">
+    <h2 style="margin-bottom: 8px;">نظام إدارة البيع المباشر (UMG)</h2>
+    <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;">اختر الحساب والدور للبدء:</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <button class="btn-main" onclick="loginAs('owner', 'أحمد (الأونر)')">دخول كـ: أونر (Ahmed - Owner)</button>
+      <button class="btn-main" style="background: #334155;" onclick="loginAs('trainer', 'كابتن علي (مدرب)')">دخول كـ: مدرب (Trainer)</button>
+      <button class="btn-main" style="background: #475569;" onclick="loginAs('new_member', 'محمد جاسم (عضو جديد)')">دخول كـ: عضو جديد (New Member)</button>
+      <button class="btn-main" style="background: #0284C7;" onclick="loginAs('super_admin', 'المدير الفني (سوبر أدمن)')">دخول كـ: سوبر أدمن (Super Admin)</button>
     </div>
-
-    <div class="card">
-      <h2>إضافة مرشح بلمسة واحدة</h2>
-      <div class="tags-container" id="categoryContainer">
-        <button class="tag-btn active" onclick="selectCategory('الأهل وعائلتهم')">الأهل</button>
-        <button class="tag-btn" onclick="selectCategory('الأصدقاء')">الأصدقاء</button>
-        <button class="tag-btn" onclick="selectCategory('أصدقاء الدراسة')">الدراسة</button>
-        <button class="tag-btn" onclick="selectCategory('أصدقاء العمل')">العمل</button>
-        <button class="tag-btn" onclick="selectCategory('مواقع التواصل')">سوشيال ميديا</button>
-        <button class="tag-btn" onclick="selectCategory('المحافظات والدول')">محافظات ودول</button>
-        <button class="tag-btn" onclick="selectCategory('المعارف العامة')">معارف عامة</button>
-      </div>
-
-      <div class="input-group">
-        <input type="text" id="nameInput" placeholder="اكتب اسم المرشح هنا..." onkeypress="handleKey(event)" />
-        <button class="btn-add" onclick="addProspect()">إضافة</button>
-      </div>
-    </div>
-
-    <div class="list-title">
-      <span>المرشحون المسجلون</span>
-      <span id="filteredText">كل الأسماء</span>
-    </div>
-
-    <div class="prospect-list" id="prospectsContainer"></div>
   </div>
 
-  <script>
-    let currentCategory = 'الأهل وعائلتهم';
-    let prospects = JSON.parse(localStorage.getItem('umg_prospects')) || [];
+  <!-- لوحة العمل الرئيسية (تتغير حسب الدور) -->
+  <div id="mainApp" style="display: none; flex-direction: column; gap: 16px;">
+    
+    <header>
+      <div class="user-badge">
+        <strong id="userName">--</strong>
+        <span class="role-tag" id="userRoleTag">--</span>
+      </div>
+      <button class="btn-logout" onclick="logout()">خروج</button>
+    </header>
 
-    function selectCategory(cat) {
-      currentCategory = cat;
-      const buttons = document.querySelectorAll('.tag-btn');
-      buttons.forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.trim() === cat || (cat === 'الأهل وعائلتهم' && btn.textContent.trim() === 'الأهل'));
-      });
-    }
+    <!-- 1. واجهة العضو الجديد: قائمة الـ 250 اسم -->
+    <div id="newMemberSection" style="display: none; flex-direction: column; gap: 14px;">
+      <div class="card">
+        <h3>رجّاجات الذاكرة (إضافة اسم جديد)</h3>
+        <div class="tags" id="tagList">
+          <span class="tag active" onclick="setCat(this, 'الأهل')">الأهل</span>
+          <span class="tag" onclick="setCat(this, 'الأصدقاء')">الأصدقاء</span>
+          <span class="tag" onclick="setCat(this, 'الدراسة')">الدراسة</span>
+          <span class="tag" onclick="setCat(this, 'العمل')">العمل</span>
+          <span class="tag" onclick="setCat(this, 'سوشيال ميديا')">سوشيال ميديا</span>
+          <span class="tag" onclick="setCat(this, 'معارف')">معارف</span>
+        </div>
+        <div class="input-group">
+          <input type="text" id="pName" placeholder="اسم المرشح..." />
+          <button class="btn-main" onclick="addProspect()">إضافة</button>
+        </div>
+      </div>
 
-    function addProspect() {
-      const input = document.getElementById('nameInput');
-      const name = input.value.trim();
-      if (!name) return;
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+          <h3>قائمتي الشخصية</h3>
+          <span style="font-weight: 700; color: var(--primary-accent);" id="pCount">0 / 250</span>
+        </div>
+        <div id="myProspectsList"></div>
+      </div>
+    </div>
 
-      const newProspect = {
-        id: Date.now(),
-        name: name,
-        category: currentCategory,
-        isTop21: false,
-        isTop5: false
-      };
+    <!-- 2. واجهة المدرب: متابعة أعضاء فريقه ومواعيدهم -->
+    <div id="trainerSection" style="display: none; flex-direction: column; gap: 14px;">
+      <div class="card">
+        <h3>لوحة متابعة الفريق</h3>
+        <p style="color: var(--text-muted); font-size: 12px; margin-bottom: 12px;">نظرة سريعة على تقدم أعضاء فريقك في استخراج الـ 250 اسم والـ 21 والـ 5</p>
+        <div id="teamMemberList"></div>
+      </div>
+    </div>
 
-      prospects.unshift(newProspect);
-      saveAndRender();
-      input.value = '';
-      input.focus();
-    }
+    <!-- 3. واجهة الأونر والسوبر أدمن: نظرة عامة وإدارة النظام -->
+    <div id="adminSection" style="display: none; flex-direction: column; gap: 14px;">
+      <div class="stats-grid">
+        <div class="stat-box"><div class="num" id="statMembersCount">12</div><div class="lbl">أعضاء الفريق</div></div>
+        <div class="stat-box"><div class="num" id="statTotalNames">680</div><div class="lbl">الأسماء المستخرجة</div></div>
+        <div class="stat-box"><div class="num" id="statReady">48</div><div class="lbl">جاهزون للدعوة</div></div>
+      </div>
 
-    function handleKey(e) {
-      if (e.key === 'Enter') addProspect();
-    }
+      <div class="card">
+        <h3>إدارة الرتب والأعضاء</h3>
+        <div class="input-group">
+          <input type="text" id="newMemberName" placeholder="اسم العضو الجديد..." />
+          <select id="newMemberRole">
+            <option value="new_member">عضو جديد</option>
+            <option value="trainer">مدرب</option>
+          </select>
+          <button class="btn-main" onclick="addNewMember()">تسجيل</button>
+        </div>
+      </div>
+    </div>
 
-    function toggleTop21(id) {
-      prospects = prospects.map(p => {
-        if (p.id === id) {
-          const nextVal = !p.isTop21;
-          return { ...p, isTop21: nextVal, isTop5: nextVal ? p.isTop5 : false };
-        }
-        return p;
-      });
-      saveAndRender();
-    }
+  </div>
 
-    function toggleTop5(id) {
-      prospects = prospects.map(p => {
-        if (p.id === id) {
-          const nextVal = !p.isTop5;
-          return { ...p, isTop5: nextVal, isTop21: nextVal ? true : p.isTop21 };
-        }
-        return p;
-      });
-      saveAndRender();
-    }
+</div>
 
-    function removeProspect(id) {
-      prospects = prospects.filter(p => p.id !== id);
-      saveAndRender();
-    }
+<script>
+  let currentUser = null;
+  let currentCategory = 'الأهل';
 
-    function saveAndRender() {
-      localStorage.setItem('umg_prospects', JSON.stringify(prospects));
-      render();
-    }
+  // بيانات تجريبية سحابية محفوظة محلياً
+  let teamData = JSON.parse(localStorage.getItem('umg_team')) || [
+    { name: 'محمد جاسم', role: 'عضو جديد', namesCount: 42, top21: 14, top5: 4 },
+    { name: 'حيدر كرار', role: 'عضو جديد', namesCount: 110, top21: 21, top5: 5 },
+    { name: 'سارة أحمد', role: 'عضو جديد', namesCount: 210, top21: 21, top5: 5 }
+  ];
 
-    function render() {
-      const container = document.getElementById('prospectsContainer');
-      container.innerHTML = '';
+  let prospects = JSON.parse(localStorage.getItem('umg_my_prospects')) || [];
 
-      const top21Count = prospects.filter(p => p.isTop21).length;
-      const top5Count = prospects.filter(p => p.isTop5).length;
+  function loginAs(role, name) {
+    currentUser = { role, name };
+    document.getElementById('loginView').style.display = 'none';
+    document.getElementById('mainApp').style.display = 'flex';
+    document.getElementById('userName').innerText = name;
+    
+    const roleLabels = {
+      'new_member': 'عضو جديد',
+      'trainer': 'مدرب معتمد',
+      'owner': 'الأونر (أحمد)',
+      'super_admin': 'سوبر أدمن'
+    };
+    document.getElementById('userRoleTag').innerText = roleLabels[role];
 
-      document.getElementById('statTotal').innerText = prospects.length;
-      document.getElementById('statTop21').innerText = top21Count;
-      document.getElementById('statTop5').innerText = top5Count;
-      document.getElementById('totalBadge').innerText = `${prospects.length} / 250`;
+    // إظهار وإخفاء الواجهات بحسب الصلاحيات
+    document.getElementById('newMemberSection').style.display = (role === 'new_member' || role === 'owner') ? 'flex' : 'none';
+    document.getElementById('trainerSection').style.display = (role === 'trainer' || role === 'owner') ? 'flex' : 'none';
+    document.getElementById('adminSection').style.display = (role === 'super_admin' || role === 'owner') ? 'flex' : 'none';
 
-      if (prospects.length === 0) {
-        container.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 30px 0; font-size: 13px;">لا توجد أسماء مضافة بعد. اختر الفئة واكتب أول اسم!</div>`;
-        return;
-      }
+    renderAll();
+  }
 
-      prospects.forEach(p => {
-        const item = document.createElement('div');
-        item.className = 'prospect-item';
-        item.innerHTML = `
-          <div class="prospect-info">
-            <span class="prospect-name">${p.name}</span>
-            <span class="prospect-category">${p.category}</span>
-          </div>
-          <div class="prospect-actions">
-            <button class="action-btn ${p.isTop21 ? 'active-top21' : ''}" onclick="toggleTop21(${p.id})">⭐ 21</button>
-            <button class="action-btn ${p.isTop5 ? 'active-top5' : ''}" onclick="toggleTop5(${p.id})">🔥 5 للدعوة</button>
-            <button class="action-btn" style="color: var(--danger);" onclick="removeProspect(${p.id})">✕</button>
-          </div>
-        `;
-        container.appendChild(item);
-      });
-    }
+  function logout() {
+    currentUser = null;
+    document.getElementById('mainApp').style.display = 'none';
+    document.getElementById('loginView').style.display = 'block';
+  }
 
-    render();
-  </script>
+  function setCat(el, cat) {
+    currentCategory = cat;
+    document.querySelectorAll('.tag').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  function addProspect() {
+    const input = document.getElementById('pName');
+    const name = input.value.trim();
+    if (!name) return;
+
+    prospects.unshift({ id: Date.now(), name, cat: currentCategory, top5: false });
+    localStorage.setItem('umg_my_prospects', JSON.stringify(prospects));
+    input.value = '';
+    renderProspects();
+  }
+
+  function toggleTop5(id) {
+    prospects = prospects.map(p => p.id === id ? { ...p, top5: !p.top5 } : p);
+    localStorage.setItem('umg_my_prospects', JSON.stringify(prospects));
+    renderProspects();
+  }
+
+  function renderProspects() {
+    const list = document.getElementById('myProspectsList');
+    list.innerHTML = '';
+    document.getElementById('pCount').innerText = `${prospects.length} / 250`;
+
+    prospects.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'item-card';
+      item.innerHTML = `
+        <div>
+          <strong>${p.name}</strong>
+          <div style="font-size: 11px; color: var(--text-muted);">${p.cat}</div>
+        </div>
+        <div class="actions">
+          <button class="btn-sm ${p.top5 ? 'active-top' : ''}" onclick="toggleTop5(${p.id})">
+            ${p.top5 ? '✔ جاهز للدعوة (من الـ 5)' : 'ترقية لأفضل 5'}
+          </button>
+        </div>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  function renderTrainer() {
+    const list = document.getElementById('teamMemberList');
+    list.innerHTML = '';
+    teamData.forEach(m => {
+      const item = document.createElement('div');
+      item.className = 'item-card';
+      item.innerHTML = `
+        <div>
+          <strong>${m.name}</strong>
+          <div style="font-size: 12px; color: var(--text-muted);">تم إدخال: ${m.namesCount} اسم</div>
+        </div>
+        <div style="text-align: left;">
+          <span style="font-size: 11px; background: #FEF3C7; color: #92400E; padding: 2px 6px; border-radius: 4px;">21: ${m.top21}</span>
+          <span style="font-size: 11px; background: #DCFCE7; color: #166534; padding: 2px 6px; border-radius: 4px;">5: ${m.top5}</span>
+        </div>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  function addNewMember() {
+    const nameInput = document.getElementById('newMemberName');
+    const name = nameInput.value.trim();
+    if (!name) return;
+    teamData.push({ name, role: 'عضو جديد', namesCount: 0, top21: 0, top5: 0 });
+    localStorage.setItem('umg_team', JSON.stringify(teamData));
+    nameInput.value = '';
+    renderTrainer();
+  }
+
+  function renderAll() {
+    renderProspects();
+    renderTrainer();
+  }
+</script>
+
 </body>
 </html>
